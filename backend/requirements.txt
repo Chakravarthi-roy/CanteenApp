@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+passlib
+bcrypt
+psycopg2
+email-validator
+python-dotenv
+faker
+locust
+python-jose[cryptography]
+python-multipart
+websockets
