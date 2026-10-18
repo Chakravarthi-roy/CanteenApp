@@ -12,7 +12,7 @@ from CRUD.update import updateOrder
 from db.schemas import OrderCreate, OrderUpdate, OrderDisplay
 from websocket import manager
 
-from auth.dependencies import get_current_admin
+from auth.dependencies import get_current_admin, get_current_user
 
 IST = timezone(timedelta(hours=5, minutes=30))
 
@@ -226,7 +226,19 @@ def get_cancelled_orders(
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     
-    
+@router.get("/my-orders", response_model=List[dict])
+def get_my_orders(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    orders = db.query(Order).options(
+        joinedload(Order.order_items).joinedload(OrderItem.product_related),
+        joinedload(Order.user)
+    ).filter(
+        Order.user_id == current_user.id
+    ).order_by(Order.order_time.desc()).all()
+    return [formatOrder(order) for order in orders]
+
 @router.get("/{order_id}", response_model=OrderDisplay)
 def get_order_by_id(order_id: int, db: Session = Depends(get_db)):
     db_order = getOrder(db, order_id)

@@ -1,0 +1,67 @@
+:root {
+  --cream: #fdfcdc;
+  --peach: #fed9b7;
+  --coral: #f07167;
+  --teal: #00afb9;
+  --deep-teal: #0081a7;
+  --orange: #ff6b35;
+  --light-peach: #f7c59f;
+  --warm-white: #efefd0;
+  --navy: #004e89;
+  --ocean: #1a659e;
+  --white: #ffffff;
+  --text-dark: #1a1a2e;
+  --text-mid: #555;
+  --text-light: #888;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--cream);
+  color: var(--text-dark);
+}
+
+button {
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+button:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+input, select, textarea {
+  font-family: 'Segoe UI', sans-serif;
+  border: 2px solid var(--peach);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+  outline: none;
+  width: 100%;
+  background: var(--white);
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--teal);
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
